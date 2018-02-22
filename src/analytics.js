@@ -13,6 +13,17 @@ if (process.env.NODE_ENV !== "production") {
   amplitude.init(amplitudeProdApiKey);
 }
 
+var segment = require("avo-segment-js");
+
+var segmentDevApiKey = "QHjQR9BpTQ6gsiM0TftH0fVs5G172x3Z";
+var segmentProdApiKey = "QHjQR9BpTQ6gsiM0TftH0fVs5G172x3Z";
+
+if (process.env.NODE_ENV !== "production") {
+  segment.init(segmentDevApiKey);
+} else {
+  segment.init(segmentProdApiKey);
+}
+
 var asserts;
 
 if (process.env.NODE_ENV !== "production") {
@@ -27,7 +38,9 @@ var counterIncrement = function(oldValue, newValue) {
   
   amplitude.logEvent("Counter Increment", {"Old Value": oldValue, 
     "New Value": newValue});
-}
+  segment.logEvent("Counter Increment", {"Old Value": oldValue, 
+    "New Value": newValue});
+};
 
 var counterDecrement = function(oldValue, newValue) {
   if (process.env.NODE_ENV !== "production") {
@@ -37,16 +50,18 @@ var counterDecrement = function(oldValue, newValue) {
   
   amplitude.logEvent("Counter Decrement", {"Old Value": oldValue, 
     "New Value": newValue});
-}
+  segment.logEvent("Counter Decrement", {"Old Value": oldValue, 
+    "New Value": newValue});
+};
 
 if (process.env.NODE_ENV !== "production") {
   var assertOldValue = function(oldValue) {
     asserts.assertInt("Old Value", oldValue);
-  }
+  };
   
   var assertNewValue = function(newValue) {
     asserts.assertInt("New Value", newValue);
-  }
+  };
 }
 
 exports.counterIncrement = counterIncrement;

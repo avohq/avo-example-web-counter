@@ -29,6 +29,16 @@ var counterIncrement = function(oldValue, newValue) {
     "New Value": newValue});
 };
 
+var counterDecrement = function(oldValue, newValue) {
+  if (process.env.NODE_ENV !== "production") {
+    assertOldValue(oldValue);
+    assertNewValue(newValue);
+  }
+  
+  amplitude.logEvent("Counter Decrement", {"Old Value": oldValue, 
+    "New Value": newValue});
+};
+
 if (process.env.NODE_ENV !== "production") {
   var assertOldValue = function(oldValue) {
     asserts.assertInt("Old Value", oldValue);
@@ -40,4 +50,5 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 exports.counterIncrement = counterIncrement;
+exports.counterDecrement = counterDecrement;
 

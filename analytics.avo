@@ -21,9 +21,3 @@ event "Counter Increment"
 
   property "Old Value"
   property "New Value"
-
-event "Counter Decrement"
-  description "When user clicks the add button"
-
-  property "Old Value"
-  property "New Value"

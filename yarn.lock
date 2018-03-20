@@ -328,9 +328,9 @@ avo-segment-js@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/avo-segment-js/-/avo-segment-js-1.2.0.tgz#7d518a082802d7b945bd07d5118333daf2ce7cb2"
 
-avo@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/avo/-/avo-0.0.4.tgz#63596493b17fdb5a2a43ba885737df5221e53375"
+avo@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/avo/-/avo-0.0.5.tgz#4f95a3f0395514b5cf30a3c41992b35f7be10439"
   dependencies:
     download-github-release "0.3.2"
     rimraf "2.6.2"

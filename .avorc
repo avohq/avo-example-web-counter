@@ -11,8 +11,3 @@ targets:
         apiKeys:
           dev: 26aeb7d9e9737f62d9bc9d10f7efdc9a
           prod: 26aeb7d9e9737f62d9bc9d10f7efdc9a
-      segment:
-        analyticsPackage: avo-segment-js
-        apiKeys:
-          dev: QHjQR9BpTQ6gsiM0TftH0fVs5G172x3Z
-          prod: QHjQR9BpTQ6gsiM0TftH0fVs5G172x3Z

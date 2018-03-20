@@ -21,7 +21,6 @@ class App extends Component {
             onClick={() =>
               this.setState((prevState, props) => {
                 let nextCounter = prevState.counter - 1;
-                Analytics.counterDecrement(prevState.counter, nextCounter);
                 return {counter: nextCounter};
               })
             }

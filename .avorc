@@ -1,6 +1,8 @@
 schema: analytics.avo
 targets:
   Web:
+    devPlatform: Web
+    analyticsTool: Amplitude
     language: JavaScript
     dist: src/analytics.js
     platform:

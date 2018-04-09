@@ -24,6 +24,17 @@ if (process.env.NODE_ENV !== "production") {
   segment.init(segmentProdApiKey);
 }
 
+var mixpanel = require("avo-mixpanel-browser");
+
+var mixpanelDevApiKey = "ca8d0b70d7307092d25b791cd6b3b8e6";
+var mixpanelProdApiKey = "ca8d0b70d7307092d25b791cd6b3b8e6";
+
+if (process.env.NODE_ENV !== "production") {
+  mixpanel.init(mixpanelDevApiKey);
+} else {
+  mixpanel.init(mixpanelProdApiKey);
+}
+
 var asserts;
 
 if (process.env.NODE_ENV !== "production") {
@@ -31,30 +42,54 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 var counterIncrement = function(oldValue, newValue) {
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.NODE_ENV === "development") {
     assertOldValue(oldValue);
     assertNewValue(newValue);
+  }
+  
+  if (process.env.NODE_ENV === "development") {
+    console.log("[avo] Event sent:", "Counter Increment", {
+      "Old Value": oldValue, "New Value": newValue});
   }
   
   amplitude.logEvent("Counter Increment", {"Old Value": oldValue, 
     "New Value": newValue});
   segment.logEvent("Counter Increment", {"Old Value": oldValue, 
     "New Value": newValue});
+  mixpanel.logEvent("Counter Increment", {"Old Value": oldValue, 
+    "New Value": newValue});
 };
 
 var counterDecrement = function(oldValue, newValue) {
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.NODE_ENV === "development") {
     assertOldValue(oldValue);
     assertNewValue(newValue);
+  }
+  
+  if (process.env.NODE_ENV === "development") {
+    console.log("[avo] Event sent:", "Counter Decrement", {
+      "Old Value": oldValue, "New Value": newValue});
   }
   
   amplitude.logEvent("Counter Decrement", {"Old Value": oldValue, 
     "New Value": newValue});
   segment.logEvent("Counter Decrement", {"Old Value": oldValue, 
     "New Value": newValue});
+  mixpanel.logEvent("Counter Decrement", {"Old Value": oldValue, 
+    "New Value": newValue});
 };
 
-if (process.env.NODE_ENV !== "production") {
+var logRevenue = function(productId_, quantity_, price_, revenueType_) {
+  if (process.env.NODE_ENV === "development") {
+    console.log("[avo] Event sent:", "Log Revenue", {});
+  }
+  
+  amplitude.logRevenue(productId_, quantity_, price_, revenueType_, {});
+  segment.logRevenue(productId_, quantity_, price_, revenueType_, {});
+  mixpanel.logRevenue(productId_, quantity_, price_, revenueType_, {});
+};
+
+if (process.env.NODE_ENV === "development") {
   var assertOldValue = function(oldValue) {
     asserts.assertInt("Old Value", oldValue);
   };
@@ -66,4 +101,5 @@ if (process.env.NODE_ENV !== "production") {
 
 exports.counterIncrement = counterIncrement;
 exports.counterDecrement = counterDecrement;
+exports.logRevenue = logRevenue;
 
